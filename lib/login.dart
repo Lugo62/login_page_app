@@ -63,6 +63,15 @@ class Login extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Email is required ";
+                    }
+                    if (!(value.contains("@") || value.contains("."))) {
+                      return "Enter a valid Email!";
+                    }
+                  },
+
                   controller: ec,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
@@ -97,6 +106,14 @@ class Login extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required ";
+                    }
+                    if (!(value.length == 6)) {
+                      return "atleast 6 characters required!";
+                    }
+                  },
                   controller: pc,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(

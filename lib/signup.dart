@@ -62,6 +62,11 @@ class Signup extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Username is required ";
+                    }
+                  },
                   controller: uc,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
@@ -96,6 +101,15 @@ class Signup extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Email is required ";
+                    }
+                    if (!(value.contains("@") || value.contains("."))) {
+                      return "Enter a valid Email!";
+                    }
+                  },
+
                   controller: e1c,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
@@ -130,6 +144,15 @@ class Signup extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required ";
+                    }
+                    if (!(value.length == 6)) {
+                      return "atleast 6 characters required!";
+                    }
+                  },
+
                   controller: p1c,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
@@ -164,6 +187,14 @@ class Signup extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required ";
+                    }
+                    if (value != p1c.text) {
+                      return "Password doesn't match";
+                    }
+                  },
                   controller: cpc,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(
@@ -200,7 +231,11 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (formkey_signup.currentState!.validate()) {
+                        print("Save");
+                      }
+                    },
                     child: Text("Sign Up"),
                   ),
                 ),
