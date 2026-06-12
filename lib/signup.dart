@@ -1,15 +1,26 @@
 import 'package:first_app/login.dart';
+import 'package:first_app/service.dart';
 import 'package:flutter/material.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   Signup({super.key});
 
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
   final formkey_signup = GlobalKey<FormState>();
 
   TextEditingController e1c = TextEditingController();
+
   TextEditingController p1c = TextEditingController();
+
   TextEditingController uc = TextEditingController();
+
   TextEditingController cpc = TextEditingController();
+
+  bool isVisible1 = true, isVisible2 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +155,7 @@ class Signup extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  obscureText: isVisible1,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required ";
@@ -168,6 +180,20 @@ class Signup extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
+                    suffixIcon: IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor: const Color.fromARGB(255, 98, 0, 255),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isVisible1 = !isVisible1;
+                        });
+                      },
+                      icon:
+                          isVisible1
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility),
+                    ),
                   ),
                 ),
 
@@ -187,6 +213,7 @@ class Signup extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  obscureText: isVisible2,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required ";
@@ -209,6 +236,21 @@ class Signup extends StatelessWidget {
                         color: Colors.black,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+
+                    suffixIcon: IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor: const Color.fromARGB(255, 98, 0, 255),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isVisible2 = !isVisible2;
+                        });
+                      },
+                      icon:
+                          isVisible2
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility),
                     ),
                   ),
                 ),
@@ -233,7 +275,11 @@ class Signup extends StatelessWidget {
                     ),
                     onPressed: () {
                       if (formkey_signup.currentState!.validate()) {
-                        print("Save");
+                        to_register(uc.text, e1c.text, p1c.text, context);
+                        uc.clear();
+                        e1c.clear();
+                        p1c.clear();
+                        cpc.clear();
                       }
                     },
                     child: Text("Sign Up"),

@@ -1,11 +1,12 @@
 import 'package:first_app/login.dart';
+import 'package:first_app/service.dart';
 import 'package:first_app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Forgot extends StatelessWidget {
   Forgot({super.key});
-final formkey_forgot=GlobalKey<FormState>();
+  final formkey_forgot = GlobalKey<FormState>();
   TextEditingController e2c = TextEditingController();
 
   @override
@@ -13,13 +14,14 @@ final formkey_forgot=GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: Colors.white,
 
-      body: Form(key: formkey_forgot,
+      body: Form(
+        key: formkey_forgot,
         child: Center(
           child: Padding(
             padding: EdgeInsets.all(40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-        
+
               children: [
                 //text1
                 Text(
@@ -30,14 +32,14 @@ final formkey_forgot=GlobalKey<FormState>();
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-        
+
                 SizedBox(height: 5),
-        
+
                 //textfields
                 SizedBox(height: 30),
-        
+
                 SizedBox(height: 3),
-        
+
                 TextFormField(
                   controller: e2c,
                   decoration: InputDecoration(
@@ -57,32 +59,36 @@ final formkey_forgot=GlobalKey<FormState>();
                     ),
                   ),
                 ),
-        
+
                 SizedBox(height: 20),
-        
+
                 Container(
                   width: double.infinity,
                   height: 60,
-        
+
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 39, 57, 255),
                       foregroundColor: Colors.white,
                       elevation: 4,
-        
+
                       side: BorderSide(width: 2, color: Colors.black),
-        
+
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      forgot_pwd(e2c.text, context);
+
+                      e2c.clear();
+                    },
                     child: Text("Send Link"),
                   ),
                 ),
-        
+
                 SizedBox(height: 30),
-        
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -93,9 +99,9 @@ final formkey_forgot=GlobalKey<FormState>();
                         fontSize: 12,
                       ),
                     ),
-        
+
                     SizedBox(width: 8),
-        
+
                     GestureDetector(
                       onTap: () {
                         Navigator.push(

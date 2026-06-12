@@ -1,14 +1,24 @@
 import 'package:first_app/forgot_page.dart';
+import 'package:first_app/service.dart';
 import 'package:first_app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final formkey_login = GlobalKey<FormState>();
 
   TextEditingController ec = TextEditingController();
+
   TextEditingController pc = TextEditingController();
+
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +116,7 @@ class Login extends StatelessWidget {
                 SizedBox(height: 3),
 
                 TextFormField(
+                  obscureText: isVisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required ";
@@ -128,6 +139,21 @@ class Login extends StatelessWidget {
                         color: Colors.black,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+
+                    suffixIcon: IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor: const Color.fromARGB(255, 98, 0, 255),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isVisible = !isVisible;
+                        });
+                      },
+                      icon:
+                          isVisible
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility),
                     ),
                   ),
                 ),
@@ -168,7 +194,9 @@ class Login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      to_login(ec.text, pc.text, context);
+                    },
                     child: Text("Login"),
                   ),
                 ),
